@@ -283,73 +283,76 @@ function SideBar() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-[#232734]">
-      {/* LOGO */}
-      <Link href="/" className="p-2">
-        <Image src={logo} alt="DB-GPT" width={239} height={60} className="w-full h-full" />
-      </Link>
-      <Link href="/" className="flex items-center justify-center mb-4 mx-4 h-11 bg-theme-primary rounded text-white">
-        <PlusOutlined className="mr-2" />
-        <span>{t('new_chat')}</span>
-      </Link>
-      {/* Chat List */}
-      <div className="flex-1 overflow-y-scroll">
-        {dialogueList?.map((item) => {
-          const active = item.conv_uid === chatId && item.chat_mode === scene;
+    <div>
+      {/* <div>this is side bar---r</div> */}
+      <div className="flex flex-col h-screen bg-white dark:bg-[#232734]">
+        {/* LOGO */}
+        <Link href="/" className="p-2">
+          <Image src={logo} alt="DB-GPT" width={239} height={60} className="w-full h-full" />
+        </Link>
+        <Link href="/" className="flex items-center justify-center mb-4 mx-4 h-11 bg-theme-primary rounded text-white">
+          <PlusOutlined className="mr-2" />
+          <span>{t('new_chat')}</span>
+        </Link>
+        {/* Chat List */}
+        <div className="flex-1 overflow-y-scroll">
+          {dialogueList?.map((item) => {
+            const active = item.conv_uid === chatId && item.chat_mode === scene;
 
-          return (
-            <Link
-              key={item.conv_uid}
-              href={`/chat?scene=${item.chat_mode}&id=${item.conv_uid}`}
-              className={`group/item ${menuItemStyle(active)}`}
-              onClick={() => {
-                handleClickChatItem(item);
-              }}
-            >
-              <MessageOutlined className="text-base" />
-              <div className="flex-1 line-clamp-1 mx-2 text-sm">{item.user_name || item.user_input}</div>
-              <div
-                className="group-hover/item:opacity-100 cursor-pointer opacity-0 mr-1"
-                onClick={(e) => {
-                  e.preventDefault();
-                  copyLink(item);
+            return (
+              <Link
+                key={item.conv_uid}
+                href={`/chat?scene=${item.chat_mode}&id=${item.conv_uid}`}
+                className={`group/item ${menuItemStyle(active)}`}
+                onClick={() => {
+                  handleClickChatItem(item);
                 }}
               >
-                <ShareAltOutlined />
-              </div>
-              <div
-                className="group-hover/item:opacity-100 cursor-pointer opacity-0"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDelChat(item);
-                }}
-              >
-                <DeleteOutlined />
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-      {/* Settings */}
-      <div className="pt-4">
-        <div className="max-h-52 overflow-y-auto scrollbar-default">
-          {routes.map((item) => (
-            <Link key={item.key} href={item.path} className={`${menuItemStyle(pathname === item.path)} overflow-hidden`}>
-              <>
-                {item.icon}
-                <span className="ml-3 text-sm">{item.name}</span>
-              </>
-            </Link>
-          ))}
+                <MessageOutlined className="text-base" />
+                <div className="flex-1 line-clamp-1 mx-2 text-sm">{item.user_name || item.user_input}</div>
+                <div
+                  className="group-hover/item:opacity-100 cursor-pointer opacity-0 mr-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    copyLink(item);
+                  }}
+                >
+                  <ShareAltOutlined />
+                </div>
+                <div
+                  className="group-hover/item:opacity-100 cursor-pointer opacity-0"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDelChat(item);
+                  }}
+                >
+                  <DeleteOutlined />
+                </div>
+              </Link>
+            );
+          })}
         </div>
-        <div className="flex items-center justify-around py-4 mt-2">
-          {settings.map((item) => (
-            <Tooltip key={item.key} title={item.name}>
-              <div className="flex-1 flex items-center justify-center cursor-pointer text-xl" onClick={item.onClick}>
-                {item.icon}
-              </div>
-            </Tooltip>
-          ))}
+        {/* Settings */}
+        <div className="pt-4">
+          <div className="max-h-52 overflow-y-auto scrollbar-default">
+            {routes.map((item) => (
+              <Link key={item.key} href={item.path} className={`${menuItemStyle(pathname === item.path)} overflow-hidden`}>
+                <>
+                  {item.icon}
+                  <span className="ml-3 text-sm">{item.name}</span>
+                </>
+              </Link>
+            ))}
+          </div>
+          {/* <div className="flex items-center justify-around py-4 mt-2">
+            {settings.map((item) => (
+              <Tooltip key={item.key} title={item.name}>
+                <div className="flex-1 flex items-center justify-center cursor-pointer text-xl" onClick={item.onClick}>
+                  {item.icon}
+                </div>
+              </Tooltip>
+            ))}
+          </div> */}
         </div>
       </div>
     </div>

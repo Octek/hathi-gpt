@@ -20,8 +20,9 @@ function Chat() {
       setIsContract(false);
     }
   }, [id, scene]);
-
-  return <>{isContract ? <DbEditor /> : <ChatContainer />}</>;
+  console.log('isContract===', isContract);
+  return <div>this is contract screen</div>;
+  // return <>{isContract ? <DbEditor /> : <ChatContainer />}</>;
 }
 
 export default Chat;

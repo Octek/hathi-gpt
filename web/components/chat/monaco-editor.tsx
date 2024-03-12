@@ -1,4 +1,5 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
+// import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
+import * as monaco from 'monaco-editor';
 import Editor, { OnChange, loader } from '@monaco-editor/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
